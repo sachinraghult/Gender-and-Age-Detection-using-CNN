@@ -2,7 +2,12 @@
 
 Code link : 
 
-https://www.kaggle.com/sachinraghul/gender-and-age-detection
+https://colab.research.google.com/drive/10iQ25dOek-EKIyjEHoJMnLZUKkRN7n0z?usp=sharing
+
+https://colab.research.google.com/drive/10iQ25dOek-EKIyjEHoJMnLZUKkRN7n0z?usp=sharing
+
+https://colab.research.google.com/drive/10iQ25dOek-EKIyjEHoJMnLZUKkRN7n0z?usp=sharing
+
 
 Dataset link for the Gender recognition using convolution networks :
 
