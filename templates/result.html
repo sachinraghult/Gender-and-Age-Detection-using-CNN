@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Language Detection</title>
+    <link rel="stylesheet" type="text/css" href="static/css/form.css">
+    <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+
+</head>
+<body>
+
+    <div class="form-container">
+        <div class="belt">
+          <div class="form">
+            <div class="form-header">
+              <h2>Gender and Age Detection</h2>
+            </div>
+            <img id="uploadPreview" style="width: 300px; height: 300px;" src="../static/file.jpg"/>
+            <button onclick="window.location.href='/'">Back</button>
+            <button>Predict</button>
+          </div>
+          <div class="progress-wrapper">
+            <div class="progress-div">
+              <h3>Predicting...</h3>
+              <div class="progress-outer">
+                <div class="progress-inner"></div>
+              </div>
+            </div>
+          </div>
+          <div class="success-wrapper">
+            <div class="success">
+              <i class="ion-android-done"></i>
+              <h2>Predicted Language is <span style="color: #FF785A;font-weight: bold;">{{ result }}</span></h2>
+              <button onclick="window.location.href='/'">Back</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+</body>
+<script src='static/js/form.js' type="text/javascript"></script>
+
+
+</html>

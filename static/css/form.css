@@ -1,0 +1,386 @@
+body {
+    background: #222;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    height: 100vh;
+  }
+  
+  body * {
+    font-family: 'consolas';
+  }
+  
+  body .form-container {
+    width: 600px;
+    max-width: 100%;
+    background: #fff;
+    -webkit-box-shadow: 0px 10px 25px -5px rgba(0, 0, 0, 0.3);
+            box-shadow: 0px 10px 25px -5px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    overflow: hidden;
+    background: #222;
+    border: 2px solid #FF785A;
+  }
+  
+  body .form-container .ion-android-done {
+    color: #FF785A;
+    font-size: 60px;
+    -ms-flex-item-align: center;
+        -ms-grid-row-align: center;
+        align-self: center;
+  }
+  
+  body .form-container.transitioned-3 {
+    -webkit-animation: swoosh 1s 1;
+            animation: swoosh 1s 1;
+  }
+  
+  body .form-container .belt {
+    width: 300%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-transition: -webkit-transform 300ms ease-in-out;
+    transition: -webkit-transform 300ms ease-in-out;
+    transition: transform 300ms ease-in-out;
+    transition: transform 300ms ease-in-out, -webkit-transform 300ms ease-in-out;
+  }
+  
+  body .form-container .belt.transitioned-1 {
+    -webkit-transform: translateX(-33%);
+            transform: translateX(-33%);
+  }
+  
+  body .form-container .belt.transitioned-2 {
+    -webkit-transform: translateX(-66%);
+            transform: translateX(-66%);
+  }
+  
+  body .form-container .progress-wrapper, body .form-container .success-wrapper,
+  body .form-container .form {
+    width: 50%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    position: relative;
+    padding: 20px;
+  }
+  
+  select {
+    min-width: 98%;
+  }
+  
+  body .form-container .progress-wrapper .form-header, body .form-container .success-wrapper .form-header,
+  body .form-container .form .form-header {
+    width: 100%;
+    margin: 0 0 20px;
+    padding: 10px 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    border-radius: 4px;
+  }
+  
+  body .form-container .progress-wrapper .form-header h2, body .form-container .success-wrapper .form-header h2,
+  body .form-container .form .form-header h2 {
+    color: #FF785A;
+  }
+  
+  body .form-container .progress-wrapper select, body .form-container .progress-wrapper textarea, body .form-container .success-wrapper select, body .form-container .success-wrapper textarea,
+  body .form-container .form select,
+  body .form-container .form textarea {
+    display: block;
+    width: 95%;
+    max-width: 95%;
+    margin: 10px 0;
+    padding: 10px;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid #FF785A;
+    background: #333;
+    color: #FF785A;
+    caret-color: #FF785A;
+  }
+  
+  body .form-container .progress-wrapper input::-webkit-input-placeholder, body .form-container .progress-wrapper textarea::-webkit-input-placeholder, body .form-container .success-wrapper input::-webkit-input-placeholder, body .form-container .success-wrapper textarea::-webkit-input-placeholder,
+  body .form-container .form input::-webkit-input-placeholder,
+  body .form-container .form textarea::-webkit-input-placeholder {
+    color: rgba(255, 120, 90, 0.8);
+    -webkit-transition: color .2s;
+    transition: color .2s;
+    font-size: 14px;
+  }
+  
+  body .form-container .progress-wrapper input:-ms-input-placeholder, body .form-container .progress-wrapper textarea:-ms-input-placeholder, body .form-container .success-wrapper input:-ms-input-placeholder, body .form-container .success-wrapper textarea:-ms-input-placeholder,
+  body .form-container .form input:-ms-input-placeholder,
+  body .form-container .form textarea:-ms-input-placeholder {
+    color: rgba(255, 120, 90, 0.8);
+    -webkit-transition: color .2s;
+    transition: color .2s;
+    font-size: 14px;
+  }
+  
+  body .form-container .progress-wrapper input::-ms-input-placeholder, body .form-container .progress-wrapper textarea::-ms-input-placeholder, body .form-container .success-wrapper input::-ms-input-placeholder, body .form-container .success-wrapper textarea::-ms-input-placeholder,
+  body .form-container .form input::-ms-input-placeholder,
+  body .form-container .form textarea::-ms-input-placeholder {
+    color: rgba(255, 120, 90, 0.8);
+    -webkit-transition: color .2s;
+    transition: color .2s;
+    font-size: 14px;
+  }
+  
+  body .form-container .progress-wrapper input::placeholder, body .form-container .progress-wrapper textarea::placeholder, body .form-container .success-wrapper input::placeholder, body .form-container .success-wrapper textarea::placeholder,
+  body .form-container .form input::placeholder,
+  body .form-container .form textarea::placeholder {
+    color: rgba(255, 120, 90, 0.8);
+    -webkit-transition: color .2s;
+    transition: color .2s;
+    font-size: 14px;
+  }
+  
+  body .form-container .progress-wrapper input:focus::-webkit-input-placeholder, body .form-container .progress-wrapper textarea:focus::-webkit-input-placeholder, body .form-container .success-wrapper input:focus::-webkit-input-placeholder, body .form-container .success-wrapper textarea:focus::-webkit-input-placeholder,
+  body .form-container .form input:focus::-webkit-input-placeholder,
+  body .form-container .form textarea:focus::-webkit-input-placeholder {
+    color: transparent;
+  }
+  
+  body .form-container .progress-wrapper input:focus:-ms-input-placeholder, body .form-container .progress-wrapper textarea:focus:-ms-input-placeholder, body .form-container .success-wrapper input:focus:-ms-input-placeholder, body .form-container .success-wrapper textarea:focus:-ms-input-placeholder,
+  body .form-container .form input:focus:-ms-input-placeholder,
+  body .form-container .form textarea:focus:-ms-input-placeholder {
+    color: transparent;
+  }
+  
+  body .form-container .progress-wrapper input:focus::-ms-input-placeholder, body .form-container .progress-wrapper textarea:focus::-ms-input-placeholder, body .form-container .success-wrapper input:focus::-ms-input-placeholder, body .form-container .success-wrapper textarea:focus::-ms-input-placeholder,
+  body .form-container .form input:focus::-ms-input-placeholder,
+  body .form-container .form textarea:focus::-ms-input-placeholder {
+    color: transparent;
+  }
+  
+  body .form-container .progress-wrapper input:focus::placeholder, body .form-container .progress-wrapper textarea:focus::placeholder, body .form-container .success-wrapper input:focus::placeholder, body .form-container .success-wrapper textarea:focus::placeholder,
+  body .form-container .form input:focus::placeholder,
+  body .form-container .form textarea:focus::placeholder {
+    color: transparent;
+  }
+  
+  body .form-container .progress-wrapper button, body .form-container .success-wrapper button,
+  body .form-container .form button {
+    background: #FF785A;
+    border: none;
+    color: #222;
+    padding: 12px;
+    border-radius: 20%;
+    -ms-flex-item-align: end;
+        align-self: flex-end;
+    margin: 10px 10px 10px 0;
+    -webkit-box-shadow: 0px 10px 13px -12px rgba(0, 0, 0, 0.3);
+            box-shadow: 0px 10px 13px -12px rgba(0, 0, 0, 0.3);
+    outline: none;
+    -webkit-transition: all 300ms ease-in-out;
+    transition: all 300ms ease-in-out;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  body .form-container .progress-wrapper h2, body .form-container .success-wrapper h2,
+  body .form-container .form h2 {
+    color: #fff;
+    font-weight: 300;
+  }
+  
+  body .form-container .progress-div {
+    height: 150px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  
+  body .form-container .progress-div h3 {
+    color: rgba(255, 255, 255, 0.9);
+  }
+  
+  body .form-container .progress-div .progress-outer {
+    width: 550px;
+    height: 20px;
+    background: #fff;
+    padding: 5px;
+    -webkit-box-shadow: 0px 0px 5px 0 rgba(0, 0, 0, 0.3);
+            box-shadow: 0px 0px 5px 0 rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+  }
+  
+  body .form-container .progress-div .progress-outer .progress-inner {
+    background-color: #FF785A;
+    border-radius: 5px;
+    height: 20px;
+    width: 0%;
+  }
+  
+  body .form-container .progress-div .progress-outer .progress-inner.loading {
+    -webkit-animation: loading 3s 1 300ms forwards;
+            animation: loading 3s 1 300ms forwards;
+  }
+  
+  body .form-container .success {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    align-tems: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    height: 200px;
+  }
+  
+  body .form-container .success h2 {
+    color: rgba(255, 255, 255, 0.9);
+  }
+  
+  body .form-container .success button {
+    -ms-flex-item-align: center;
+        -ms-grid-row-align: center;
+        align-self: center;
+    font-size: 14px;
+  }
+  
+  body button:hover {
+    -webkit-transform: translateY(-3px);
+            transform: translateY(-3px);
+    -webkit-box-shadow: 0px 10px 23px -17px rgba(0, 0, 0, 0.3);
+            box-shadow: 0px 10px 23px -17px rgba(0, 0, 0, 0.3);
+  }
+  
+  @-webkit-keyframes swoosh {
+    0% {
+      -webkit-transform: translateY(0);
+              transform: translateY(0);
+      opacity: 1;
+    }
+    10% {
+      -webkit-transform: translateY(10px);
+              transform: translateY(10px);
+      opacity: 1;
+    }
+    50%, 70% {
+      -webkit-transform: translateY(-150%);
+              transform: translateY(-150%);
+      opacity: 0;
+    }
+    80% {
+      -webkit-transform: translateY(-50%);
+              transform: translateY(-50%);
+      opacity: .5;
+    }
+    100% {
+      -webkit-transform: translateY(0);
+              transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes swoosh {
+    0% {
+      -webkit-transform: translateY(0);
+              transform: translateY(0);
+      opacity: 1;
+    }
+    10% {
+      -webkit-transform: translateY(10px);
+              transform: translateY(10px);
+      opacity: 1;
+    }
+    50%, 70% {
+      -webkit-transform: translateY(-150%);
+              transform: translateY(-150%);
+      opacity: 0;
+    }
+    80% {
+      -webkit-transform: translateY(-50%);
+              transform: translateY(-50%);
+      opacity: .5;
+    }
+    100% {
+      -webkit-transform: translateY(0);
+              transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  @-webkit-keyframes loading {
+    0%, 30% {
+      width: 0%;
+    }
+    30% {
+      width: 10%;
+    }
+    40% {
+      width: 40%;
+    }
+    50% {
+      width: 50%;
+    }
+    60%, 70% {
+      width: 70%;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+  
+  @keyframes loading {
+    0%, 30% {
+      width: 0%;
+    }
+    30% {
+      width: 10%;
+    }
+    40% {
+      width: 40%;
+    }
+    50% {
+      width: 50%;
+    }
+    60%, 70% {
+      width: 70%;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+  /*# sourceMappingURL=form.css.map */
