@@ -12,61 +12,20 @@ import tensorflow as tf
 import matplotlib.pyplot as plt
 from flask import Flask, render_template, request
 
+
 #Initialize the flask App
 app = Flask(__name__)
+
 
 #default page of our web-app
 @app.route('/')
 def home():
     return render_template('index.html')
 
-def reduce_pixels():
-    # assign directory
-    directory = 'static/cropped_face'
-
-    data = []
-
-    # iterate over files in that directory
-    for filename in os.listdir(directory):
-        f = os.path.join(directory, filename)
-        
-        # checking if it is a file
-        if os.path.isfile(f):
-            image = cv2.imread(f, 0)
-            img = cv2.resize(image, (48, 48))
-
-            #extracting pixels from image
-            rows,cols = img.shape
-            pixels = ""
-            
-            for i in range(rows):
-                for j in range(cols):
-                    pixels = pixels + " " + str(img[i,j])
-
-            # data rows of csv file
-            data.append([filename, pixels])
 
 
-    # name of csv file 
-    filename = "static/test_data.csv"
 
-    fields = ["img_name", "pixels"]
-        
-    # writing to csv file 
-    with open(filename, 'w') as csvfile: 
-        # creating a csv writer object 
-        csvwriter = csv.writer(csvfile) 
-            
-        # writing the fields 
-        csvwriter.writerow(fields) 
-            
-        # writing the data rows 
-        csvwriter.writerows(data)
-
-
-    #remove the folder after testing
-    
-
+#face detection and saving cropped images
 def detect_face():
     classifier = cv2.CascadeClassifier(cv2.data.haarcascades+"haarcascade_frontalface_default.xml")
     dirFace = 'static/cropped_face'
@@ -76,8 +35,9 @@ def detect_face():
         os.mkdir(dirFace)
         print("Directory " , dirFace ,  " Created ")
     else:    
-        print("Directory " , dirFace ,  " has found.")
-
+        shutil.rmtree(dirFace, ignore_errors=True)
+        os.mkdir(dirFace)
+        print("Directory " , dirFace ,  " Created ")
 
     path = r'static/file.jpg'
 
@@ -103,17 +63,105 @@ def detect_face():
 
 
 
+folder = []
+
+#reduce pixels and writing the data into csv file
+def reduce_pixels():
+    # assign directory
+    directory = 'static/cropped_face'
+
+    data = []
+    lst = os.listdir(directory)
+    lst.sort()
+
+    # iterate over files in that directory
+    for filename in lst:
+        f = os.path.join(directory, filename)
+        
+        # checking if it is a file
+        if os.path.isfile(f):
+            image = cv2.imread(f, 0)
+            img = cv2.resize(image, (48, 48))
+
+            #extracting pixels from image
+            rows,cols = img.shape
+            pixels = ""
+            
+            for i in range(rows):
+                for j in range(cols):
+                    pixels = pixels + " " + str(img[i,j])
+
+            # data rows of csv file
+            data.append([filename, pixels])
+            folder.append(filename)
 
 
+    # name of csv file 
+    filename = "static/test_data.csv"
+
+    fields = ["img_name", "pixels"]
+        
+    # writing to csv file 
+    with open(filename, 'w') as csvfile: 
+        # creating a csv writer object 
+        csvwriter = csv.writer(csvfile) 
+            
+        # writing the fields 
+        csvwriter.writerow(fields) 
+            
+        # writing the data rows 
+        csvwriter.writerows(data)
+
+    #remove the folder after testing
+    
+
+
+folder.sort()
+results = []
+
+#test the model
+def test_model():
+    model = tf.keras.models.load_model("gaa_model.h5")
+
+    df=pd.read_csv("static/test_data.csv")
+
+    df['pixels']=df['pixels'].apply(lambda x:  np.array(x.split(), dtype="float32"))
+
+    df['pixels']=df['pixels']/255
+
+    X=np.array(df['pixels'].tolist())
+    X=X.reshape(X.shape[0],48,48,1)
+
+    predictions=model.predict(X)
+
+    gen={0:'Male',1:'Female'}
+    for i in range(X.shape[0]):
+        if predictions[i].round(0)==0:
+            results.append([folder[i], 'Male']);
+        else:
+            results.append([folder[i], 'Female']);
+
+
+
+
+
+
+
+#routing to result page
 @app.route('/result',methods=['POST'])
 def result():
     if request.method == 'POST':
         img = request.files['uploadImage'];
         img.save("static/file.jpg");
         detect_face();
+        reduce_pixels();
+    test_model();
+    
+    return render_template('result.html', results=results)
 
-    reduce_pixels();
-    return render_template('result.html')
 
+
+
+#turning on debug mode
 if __name__ == "__main__":
     app.run(debug=True)

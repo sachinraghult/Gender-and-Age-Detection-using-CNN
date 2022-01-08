@@ -15,8 +15,8 @@
               <h2>Gender and Age Detection</h2>
             </div>
             <img id="uploadPreview" style="width: 300px; height: 300px;" src="../static/file.jpg"/>
-            <button onclick="window.location.href='/'">Back</button>
             <button>Predict</button>
+            <button onclick="window.location.href='/'">Back</button>
           </div>
           <div class="progress-wrapper">
             <div class="progress-div">
@@ -29,7 +29,18 @@
           <div class="success-wrapper">
             <div class="success">
               <i class="ion-android-done"></i>
-              <h2>Predicted Language is <span style="color: #FF785A;font-weight: bold;">{{ result }}</span></h2>
+
+              <h2><span style="color: #FF785A;font-weight: bold;">Predictions</span></h2>
+              
+              <table>
+              {% for data in results %}
+                  <tr>
+                      <td><img style="width: 40px; height: 40px;" src="../static/cropped_face/{{ data[0] }}"/></td>
+                      <td>{{ data[1] }}</td>
+                  </tr>
+              {% endfor %}
+              </table>
+
               <button onclick="window.location.href='/'">Back</button>
             </div>
           </div>
