@@ -62,87 +62,72 @@ def detect_face():
     
 
 
+def age_group(age):
+    if age >=0 and age < 18:
+        return 1
+    elif age < 30:
+        return 2
+    elif age < 80:
+        return 3
+    else:
+        return 4 #unknown
 
-folder = []
+def get_age(distr):
+    distr = distr*4
+    if distr >= 0.65 and distr <= 1.4:return "0-18"
+    if distr >= 1.65 and distr <= 2.4:return "19-30"
+    if distr >= 2.65 and distr <= 3.4:return "31-80"
+    if distr >= 3.65 and distr <= 4.4:return "80 +"
+    return "Unknown"
+    
+def get_gender(prob):
+    if prob < 0.5:return "Male"
+    else: return "Female"
+
+def get_result(sample, loc):
+    sample = sample/255
+    model = tf.keras.models.load_model("models/model.h")
+    val = model.predict( np.array([ sample ]) )    
+    age = get_age(val[0])
+    gender = get_gender(val[1])
+    res = []
+    res.append(loc)
+    res.append(age)
+    res.append(gender)
+    return res
+
+
+
+location = []
+results = []
+images = []
+
 
 #reduce pixels and writing the data into csv file
-def reduce_pixels():
+def preprocess():
     # assign directory
     directory = 'static/cropped_face'
 
-    data = []
-    lst = os.listdir(directory)
-    lst.sort()
+    folder = os.listdir(directory)
+    folder.sort()
+
 
     # iterate over files in that directory
-    for filename in lst:
+    for filename in folder:
         f = os.path.join(directory, filename)
+        location.append(f)
         
         # checking if it is a file
         if os.path.isfile(f):
             image = cv2.imread(f, 0)
-            img = cv2.resize(image, (48, 48))
+            img = cv2.resize(image, (64, 64))
+            img = img.reshape((64, 64, 1))
+            images.append(img)
 
-            #extracting pixels from image
-            rows,cols = img.shape
-            pixels = ""
-            
-            for i in range(rows):
-                for j in range(cols):
-                    pixels = pixels + " " + str(img[i,j])
-
-            # data rows of csv file
-            data.append([filename, pixels])
-            folder.append(filename)
-
-
-    # name of csv file 
-    filename = "static/test_data.csv"
-
-    fields = ["img_name", "pixels"]
-        
-    # writing to csv file 
-    with open(filename, 'w') as csvfile: 
-        # creating a csv writer object 
-        csvwriter = csv.writer(csvfile) 
-            
-        # writing the fields 
-        csvwriter.writerow(fields) 
-            
-        # writing the data rows 
-        csvwriter.writerows(data)
-
-    #remove the folder after testing
-    
-
-
-folder.sort()
-results = []
-
-#test the model
-def test_model():
-    model = tf.keras.models.load_model("gaa_model.h5")
-
-    df=pd.read_csv("static/test_data.csv")
-
-    df['pixels']=df['pixels'].apply(lambda x:  np.array(x.split(), dtype="float32"))
-
-    df['pixels']=df['pixels']/255
-
-    X=np.array(df['pixels'].tolist())
-    X=X.reshape(X.shape[0],48,48,1)
-
-    predictions=model.predict(X)
-
-    gen={0:'Male',1:'Female'}
-    for i in range(X.shape[0]):
-        if predictions[i].round(0)==0:
-            results.append([folder[i], 'Male']);
-        else:
-            results.append([folder[i], 'Female']);
-
-
-
+    x = 0
+    for image in images:
+        results.append(get_result(image, location[x]))
+        x = x + 1
 
 
 
@@ -153,11 +138,11 @@ def result():
     if request.method == 'POST':
         img = request.files['uploadImage'];
         img.save("static/file.jpg");
+
         detect_face();
-        reduce_pixels();
-    test_model();
+        preprocess();
     
-    return render_template('result.html', results=results)
+    return render_template('result.html', location=location, results=results)
 
 
 

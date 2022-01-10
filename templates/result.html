@@ -35,8 +35,9 @@
               <table>
               {% for data in results %}
                   <tr>
-                      <td><img style="width: 40px; height: 40px;" src="../static/cropped_face/{{ data[0] }}"/></td>
-                      <td>{{ data[1] }}</td>
+                      <td><img style="width: 40px; height: 40px;" src="../{{ data[0] }}"/></td>
+                      <td style="color: whitesmoke;">{{ data[1] }}</td>
+                      <td style="color: whitesmoke;">{{ data[2] }}</td>
                   </tr>
               {% endfor %}
               </table>

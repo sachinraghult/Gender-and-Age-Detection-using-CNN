@@ -261,7 +261,7 @@ body {
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
-    align-tems: center;
+    align-items: center;
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
