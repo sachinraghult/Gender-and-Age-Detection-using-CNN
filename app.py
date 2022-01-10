@@ -6,7 +6,6 @@ import re
 import pickle
 import cv2
 import os
-import csv
 import shutil
 import tensorflow as tf
 import matplotlib.pyplot as plt
